@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NASA</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Distribuição do Diâmetro de Asteroides</h1>
+        <p>Dados de aproximações próximas da Terra nos últimos 7 dias, fornecidos pela NASA.</p>
+        <div class="chart-container">
+            <canvas id="diameterChart"></canvas>
+        </div>
+        <div class="loading-message" id="loadingMessage">
+            Carregando dados da NASA...
+        </div>
+        <div class="error-message" id="errorMessage" style="display: none;">
+            Erro ao carregar os dados. Tente novamente mais tarde.
+        </div>
+    </div>
+    
+    <script src="app.js"></script>
+</body>
+</html>
