@@ -5,10 +5,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Função para buscar e processar os dados da API da NASA
     async function fetchData() {
-        // Use a chave de demonstração. Você pode obter a sua em api.nasa.gov
-        const API_KEY = 'DEMO_KEY';
-        // Endpoint da API que retorna aproximações próximas da Terra em um período de 7 dias
-        const url = `https://api.nasa.gov/neo/rest/v1/feed?start_date=2025-08-25&end_date=2025-08-31&api_key=342GGLEA69cncFbbTGwXky7cIghXOiLQuIFfmpDi`;
+
+        // Endpoint da API que retorna aproximações próximas da Terra
+        const url = `https://api.nasa.gov/neo/rest/v1/feed?start_date=2000-08-25&end_date=2000-08-31&api_key=342GGLEA69cncFbbTGwXky7cIghXOiLQuIFfmpDi`;
         
         try {
             const response = await fetch(url);
