@@ -1,4 +1,3 @@
-<<<<<<< Updated upstream
 Nós estamos utilizando o SOLID para o nosso projeto, decidimos utilizar primeiramente o princípio de responsabilidade única, a primeira letra de SOLID o ’S’.
 
 Nós dividimos dessa forma:
@@ -16,7 +15,8 @@ Essa separação é a essência do SRP: cada classe ou módulo tem um, e apenas 
 Se você precisar mudar a rota de /asteroides para /nasa/asteroides, você só mexe no Controller.
 Se a NASA mudar a forma de fornecer os dados e você precisar alterar a lógica de busca, você só mexe no Use Case.
 Se você quiser adicionar uma nova rota para "listar planetas", você criaria um novo controller e um novo use case, e apenas registraria o novo Blueprint no app.py.
-=======
+
+-----------
 Arquitetura e Padrões de Projeto
 Este documento descreve os principais padrões de projeto (Design Patterns) utilizados na arquitetura da API, com o objetivo de garantir um código desacoplado, flexível e de fácil manutenção.
 
