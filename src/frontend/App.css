@@ -1,21 +1,113 @@
+body {
+  margin: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  display: block; /* remove flex centering vindo de index.css */
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  align-items: flex-start;
+  position: relative;
+  width: 100%;
+}
+
+/* Layers: background below, content above */
+.bg-layer {
+  position: fixed;
+  inset: 0;
+  z-index: 0; /* base layer */
+}
+
+.content {
+  position: relative;
+  z-index: 10; /* above background */
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 20px 40px;
+  margin-left: 20px;
+  background-color: transparent;
+  position: relative; /* make header the positioning context for logo */
 }
 
 .logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
+  font-size: 50px;
+  color: #b22222; /* Vermelho escuro */
+  flex-shrink: 0; /* Garante que o logo não seja redimensionado */
+  margin-left: 0; /* reset */
+  position: absolute; /* posicionado dentro do header */
+  left: 16px; /* distância da borda esquerda do header */
+  top: 110%; /* um pouco mais para baixo */
+  transform: translateY(-50%);
+  z-index: 60; /* fica acima de todo o conteúdo */
 }
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
+
+.nav {
+  display: flex;
+  gap: 200px;
+  position: absolute; /* posiciona mais à esquerda dentro do header */
+  right: 160px; /* afasta da borda direita para a esquerda */
+  top: 110%;
+  transform: translateY(-50%);
 }
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+
+.nav a {
+  text-decoration: none;
+  color: #d2a679; /* Bege claro */
+  font-size: 25px;
+}
+
+.nav a:hover {
+  text-decoration: underline;
+}
+
+.main-content {
+  position: relative; /* fluxo normal, sobre o vídeo */
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* mover para a extrema esquerda */
+  text-align: left;
+  max-width: 800px; /* limita a largura do bloco para evitar quebra estranha */
+  margin: 240px 16px 40px 80px; /* desloca um pouco para a direita no desktop */
+  z-index: 40;
+}
+
+.main-content h1 {
+  font-size: 48px;
+  margin-bottom: 40px;
+  font-weight: 700; /* bold */
+}
+
+.cta-button {
+  background: linear-gradient(90deg, #b22222, #d2a679);
+  border: none;
+  padding: 20px 50px; /* Aumentado o padding para um botão maior */
+  border-radius: 40px;
+  color: #fff;
+  font-size: 28px; /* Aumentado o tamanho da fonte */
+  cursor: pointer;
+  font-weight: 300; /* light */
+}
+
+.cta-button:hover {
+  opacity: 0.8;
 }
 
 @keyframes logo-spin {
@@ -39,4 +131,69 @@
 
 .read-the-docs {
   color: #888;
+}
+
+/* Background video styles */
+.bg-video {
+  position: absolute;
+  inset: 0; /* top:0; right:0; bottom:0; left:0 */
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1; /* atrás da camada de conteúdo */
+  filter: brightness(0.45) contrast(0.95); /* dim the video */
+  pointer-events: none; /* allow clicks through the video */
+}
+
+/* Ensure main content and header are above the video */
+
+/* Explicitly ensure header and main are above the video */
+.header {
+  z-index: 50;
+}
+
+
+
+/* Responsive adjustments: avoid logo overlapping nav on small screens */
+@media (max-width: 1024px) {
+  .header {
+    padding: 12px 16px;
+  }
+
+  .logo {
+    position: relative !important; /* return to flow so it doesn't overlap */
+    left: auto !important;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    font-size: 36px; /* slightly smaller on small/medium screens */
+    margin-right: 0;
+  }
+
+  .nav {
+    position: relative;
+    right: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin-left: 0;
+    gap: 16px;
+    font-size: 16px;
+    flex-wrap: wrap;
+  }
+
+  .main-content {
+    position: static !important; /* flow under the header on small/medium screens */
+    left: auto !important;
+    top: auto !important;
+    transform: none !important;
+    margin: 16px;
+    max-width: none;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cta-button {
+    padding: 40px 32px;
+    font-size: 18px;
+  }
 }
