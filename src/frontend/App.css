@@ -24,16 +24,29 @@ body {
 }
 
 /* Layers: background below, content above */
-.bg-layer {
-  position: fixed;
+.hero .bg-layer {
+  position: absolute;
   inset: 0;
-  z-index: 0; /* base layer */
+  z-index: 0; /* base layer dentro do hero */
+  overflow: hidden;
+  border-bottom: 1px solid #111;
 }
 
 .content {
   position: relative;
   z-index: 10; /* above background */
   width: 100%;
+}
+
+/* Hero (primeira "página") ocupa a altura total da viewport */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* pode mudar para center se quiser centralizar texto vertical */
+  padding-bottom: 40px; /* espaço para não colar na dobra */
+  box-sizing: border-box;
+  position: relative;
 }
 
 .header {
@@ -79,13 +92,13 @@ body {
 }
 
 .main-content {
-  position: relative; /* fluxo normal, sobre o vídeo */
+  position: relative;
   display: flex;
   flex-direction: column;
-  align-items: flex-start; /* mover para a extrema esquerda */
+  align-items: flex-start;
   text-align: left;
-  max-width: 800px; /* limita a largura do bloco para evitar quebra estranha */
-  margin: 240px 16px 40px 80px; /* desloca um pouco para a direita no desktop */
+  max-width: 800px;
+  margin: 220px 16px 0 80px; /* remove margin-bottom grande para colar hero na dobra */
   z-index: 40;
 }
 
@@ -152,6 +165,119 @@ body {
   z-index: 50;
 }
 
+/* ================= Asteroids Section ================= */
+.section-asteroids {
+  position: relative;
+  padding: 80px 60px 160px;
+  z-index: 10;
+  width: 100%;
+  box-sizing: border-box;
+  background: #000; /* fundo sólido preto */
+}
+
+.asteroids-title {
+  font-size: clamp(2.2rem, 5vw, 4.2rem);
+  font-weight: 500;
+  text-align: center;
+  max-width: 1200px;
+  margin: 0 auto 80px;
+  line-height: 1.15;
+  background: linear-gradient(180deg,#c35656,#b44444 60%,#8d2f2f);
+  -webkit-background-clip: text;
+  background-clip: text; /* padrão */
+  color: #b44444; /* fallback */
+  letter-spacing: 1px;
+}
+
+.asteroid-cards {
+  display: flex;
+  gap: 48px;
+  justify-content: center;
+  flex-wrap: nowrap;
+  max-width: 1500px;
+  margin: 0 auto;
+}
+
+.asteroid-card {
+  background: #121212;
+  border: 1px solid #2b2b2b;
+  border-radius: 48px;
+  padding: 56px 40px 46px;
+  width: 360px;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 28px;
+  position: relative;
+  transition: border-color .25s, transform .3s, background .3s;
+}
+
+.asteroid-card:hover {
+  border-color: #b44444;
+  transform: translateY(-6px);
+  background: #181818;
+}
+
+.asteroid-card h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 0;
+  letter-spacing: .4px;
+}
+
+.asteroid-card p {
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: #d5d5d5;
+  margin: 0;
+  max-width: 260px;
+}
+
+.icon-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 130px;
+  height: 130px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 60% 40%, #1d1d1d, #0f0f0f);
+  box-shadow: 0 0 0 1px #231f1f, 0 6px 18px -6px rgba(0,0,0,0.6);
+}
+
+.icon-wrapper svg {
+  display: block;
+}
+
+/* subtle glow nos pontos amarelos */
+.icon-wrapper circle[fill="#f3c64d"] {
+  filter: drop-shadow(0 0 4px rgba(243,198,77,.7));
+}
+
+/* ===== Responsividade seção asteroides ===== */
+@media (max-width: 1400px) {
+  .asteroid-cards { gap: 32px; }
+  .asteroid-card { width: 320px; padding: 48px 32px 40px; }
+}
+
+@media (max-width: 1100px) {
+  .asteroid-cards { flex-wrap: wrap; }
+  .asteroid-card { width: 360px; }
+}
+
+@media (max-width: 860px) {
+  .section-asteroids { padding: 100px 32px 120px; }
+  .asteroid-card { width: 100%; max-width: 520px; }
+  .asteroid-cards { gap: 40px; }
+}
+
+@media (max-width: 560px) {
+  .asteroids-title { font-size: clamp(2rem, 9vw, 3rem); margin-bottom: 56px; }
+  .section-asteroids { padding: 80px 22px 100px; }
+  .asteroid-card { border-radius: 40px; padding: 44px 28px 38px; }
+}
+
 
 
 /* Responsive adjustments: avoid logo overlapping nav on small screens */
@@ -196,4 +322,221 @@ body {
     padding: 40px 32px;
     font-size: 18px;
   }
+}
+
+
+/* --- Estilos para a Nova Seção de Análise --- */
+.analysis-section {
+  display: flex;
+  width: 100%;
+  padding: 100px 80px;
+  box-sizing: border-box;
+  align-items: center;
+  gap: 60px;
+  position: relative;
+  z-index: 20;
+  background-color: #000; /* Fundo preto para a seção */
+}
+
+.analysis-text {
+  flex: 1;
+  max-width: 400px;
+}
+
+.analysis-text h2 {
+  font-size: 42px;
+  font-weight: 700;
+  line-height: 1.2;
+  margin-bottom: 20px;
+}
+
+.analysis-text p {
+  font-size: 20px;
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.analysis-charts {
+  flex: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+  gap: 40px;
+}
+
+.chart-container {
+  background-color: #111;
+  padding: 20px;
+  border-radius: 8px;
+  border: 1px solid #222;
+}
+
+.chart-container h3 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  color: #fff;
+}
+
+.chart-container .chart-subtitle {
+  margin: 0 0 20px 0;
+  font-size: 14px;
+  color: #888;
+}
+
+/* Ajustes responsivos para a seção de análise */
+@media (max-width: 1200px) {
+  .analysis-section {
+    flex-direction: column;
+    padding: 60px 40px;
+  }
+
+  .analysis-text {
+    text-align: center;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .analysis-section {
+    padding: 40px 20px;
+  }
+
+  .analysis-charts {
+    grid-template-columns: 1fr; /* Uma coluna em telas menores */
+  }
+
+  .analysis-text h2 {
+    font-size: 32px;
+  }
+
+  .analysis-text p {
+    font-size: 16px;
+  }
+}
+
+
+/* ================= About Section (Terceira Tela) ================= */
+.section-about {
+  position: relative;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 120px 80px 140px;
+  background: #000;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+}
+
+.about-inner {
+  width: 100%;
+  max-width: 1500px;
+  margin: 0 auto;
+  display: flex;
+  gap: 140px;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+}
+
+.about-text {
+  flex: 1 1 520px;
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.about-title {
+  margin: 0 0 8px;
+  font-size: clamp(2.8rem, 5vw, 4.4rem);
+  line-height: 1.05;
+  font-weight: 700;
+  letter-spacing: .5px;
+}
+
+.about-title-main { color: #fff; }
+.about-title-accent {
+  background: linear-gradient(90deg,#b22222,#d73636 65%,#b22222);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #b22222; /* fallback */
+}
+
+.about-desc {
+  font-size: 18px;
+  line-height: 1.42;
+  margin: 0;
+  color: #e6e6e6;
+  font-weight: 300;
+}
+
+.about-media {
+  flex: 1 1 640px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 440px;
+}
+
+.about-placeholder {
+  position: relative;
+  width: 100%;
+  max-width: 640px;
+  aspect-ratio: 16 / 11;
+  border-radius: 46px;
+  background: radial-gradient(circle at 30% 25%, #151515, #0d0d0d 65%), #111;
+  border: 1px solid #212121;
+  overflow: hidden;
+  box-shadow: 0 8px 32px -12px rgba(0,0,0,.6);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  isolation: isolate;
+}
+
+.about-placeholder-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0) 55%, rgba(178,34,34,.55) 87%, rgba(178,34,34,.75));
+  pointer-events: none;
+}
+
+.about-placeholder-label {
+  position: relative;
+  font-size: 15px;
+  letter-spacing: .5px;
+  font-weight: 500;
+  margin: 0 0 18px;
+  padding: 10px 22px;
+  border-radius: 26px;
+  background: rgba(178,34,34,.15);
+  border: 1px solid rgba(178,34,34,.35);
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+  color: #f3f3f3;
+  text-transform: uppercase;
+}
+
+
+
+/* ===== Responsividade About ===== */
+@media (max-width: 1280px) {
+  .about-inner { gap: 90px; }
+  .about-placeholder { max-width: 560px; }
+}
+
+@media (max-width: 1040px) {
+  .section-about { padding: 110px 50px 120px; }
+  .about-inner { flex-direction: column; gap: 70px; }
+  .about-text { max-width: 100%; }
+  .about-media { width: 100%; min-width: 0; }
+  .about-placeholder { max-width: 100%; aspect-ratio: 16/10; }
+}
+
+@media (max-width: 620px) {
+  .section-about { padding: 90px 28px 110px; }
+  .about-title { font-size: clamp(2.4rem, 10vw, 3.4rem); }
+  .about-desc { font-size: 16px; }
+  .about-placeholder { border-radius: 38px; }
+  .about-placeholder-label { font-size: 13px; padding: 8px 18px; }
 }
