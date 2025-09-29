@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify
-from application.usecase.listar_asteroides_usecase_impl import ListarAsteroidesUseCaseImpl
+from src.application.usecase.listarasteroides.listar_asteroides_usecase_impl import ListarAsteroidesUseCaseImpl
 
 listar_asteroides_controller_blueprint = Blueprint("listar_asteroides_controller", __name__)
 
