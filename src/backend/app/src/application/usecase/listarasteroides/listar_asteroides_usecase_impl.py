@@ -1,15 +1,16 @@
-from src.application.usecase.listarasteroides.listar_asteroides_usecase import ListarAsteroidesUseCase
-from src.domain.entities.asteroide import Asteroide
-from src.adapters.external.nasa.asteroides.api_asteroides import ApiAsteroides
+from application.usecase.listarasteroides.listar_asteroides_usecase import ListarAsteroidesUseCase
+from domain.entities.asteroide import Asteroide
+from domain.entities.resposta_asteroides import RespostaAsteroides
+from adapters.external.nasa.asteroides.api_asteroides import ApiAsteroides
 
 class ListarAsteroidesUseCaseImpl(ListarAsteroidesUseCase):
 
-    def execute(self, data: str) -> list[Asteroide]:
+    def execute(self, data: str) -> RespostaAsteroides:
         api_asteroides = ApiAsteroides()
         dados_api = api_asteroides.buscar_por_data(data_busca=data)
 
         if not dados_api or "near_earth_objects" not in dados_api:
-            return []
+            return RespostaAsteroides([])
 
         lista_asteroides = []
         # A API retorna os asteroides agrupados por data
@@ -29,4 +30,4 @@ class ListarAsteroidesUseCaseImpl(ListarAsteroidesUseCase):
                 )
                 lista_asteroides.append(asteroide)
         
-        return lista_asteroides
+        return RespostaAsteroides(lista_asteroides)

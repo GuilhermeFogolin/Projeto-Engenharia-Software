@@ -168,7 +168,7 @@ body {
 /* ================= Asteroids Section ================= */
 .section-asteroids {
   position: relative;
-  padding: 80px 60px 160px;
+  padding: 80px 60px 60px;
   z-index: 10;
   width: 100%;
   box-sizing: border-box;
@@ -539,4 +539,41 @@ body {
   .about-desc { font-size: 16px; }
   .about-placeholder { border-radius: 38px; }
   .about-placeholder-label { font-size: 13px; padding: 8px 18px; }
+}
+
+
+/* Separador entre seções */
+.section-separator {
+  width: 100%;
+  padding: 60px 80px;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.separator-line {
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #730D0D 20%, #B7AD4F 80%, transparent 100%);
+  position: relative;
+}
+
+.separator-line::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8px;
+  height: 8px;
+  background: #B7AD4F;
+  border-radius: 50%;
+  box-shadow: 0 0 10px #B7AD4F;
+}
+
+@media (max-width: 768px) {
+  .section-separator {
+    padding: 40px 20px;
+  }
 }

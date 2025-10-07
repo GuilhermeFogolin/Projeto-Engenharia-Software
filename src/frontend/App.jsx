@@ -93,16 +93,48 @@ const HazardousPieChart = ({ data }) => {
     { name: 'Potencialmente Perigosos', value: hazardousCount },
     { name: 'Não Perigosos', value: nonHazardousCount },
   ];
-  const COLORS = ['#730D0D', '#B7AD4F'];
+  const COLORS = ['#8e1515', '#B7AD4F'];
+
+  // Função personalizada para renderizar valor e porcentagem centralizados
+  const renderCustomizedLabel = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, value }) => {
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <text 
+        x={x} 
+        y={y} 
+        fill="white" 
+        textAnchor="middle"
+        dominantBaseline="central"
+        fontSize="14"
+        fontWeight="bold"
+      >
+        {`${value} (${(percent * 100).toFixed(0)}%)`}
+      </text>
+    );
+  };
+
   return (
-    <ResponsiveContainer width="100%" height={200}>
+    <ResponsiveContainer width="100%" height={250}>
       <PieChart>
-        <Pie data={chartData} dataKey="value" nameKey="name" cx="50%" cy="50%" outerRadius={80} label>
+        <Pie 
+          data={chartData} 
+          dataKey="value" 
+          nameKey="name" 
+          cx="50%" 
+          cy="50%" 
+          outerRadius={80} 
+          labelLine={false}
+          label={renderCustomizedLabel}
+        >
           {chartData.map((entry, index) => (
             <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
           ))}
         </Pie>
-        <Tooltip contentStyle={{ backgroundColor: '#222', border: '1px solid #444' }} />
+        <Tooltip contentStyle={{ backgroundColor: '#B7AD4F', border: '1px solid #444' }} />
         <Legend />
       </PieChart>
     </ResponsiveContainer>
@@ -205,7 +237,13 @@ function App() {
           </div>
         </section>
 
-        {/* Seção de análise de dados */}
+        {/* Separador visual */}
+        <div className="section-separator">
+          <div className="separator-line"></div>
+        </div>
+
+
+        {/* Terceira seção - análise de dados */}
         <section id="asteroides" className="analysis-section">
           <div className="analysis-text">
             <h2>Desde o tamanho, <br/> até risco de <span className="about-title-accent">colisão.</span></h2>

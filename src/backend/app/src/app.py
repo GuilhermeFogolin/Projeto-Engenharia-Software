@@ -1,5 +1,5 @@
 from flask import Flask
-from src.adapters.entrypoint.web.controller.listarasteroides.listar_asteroides_controller import listar_asteroides_controller_blueprint
+from adapters.entrypoint.web.controller.listarasteroides.listar_asteroides_controller import listar_asteroides_controller_blueprint
 
 app = Flask(__name__)
 
