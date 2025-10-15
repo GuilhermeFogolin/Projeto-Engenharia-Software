@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 class ApiAsteroides:
     _instance = None
 
@@ -25,7 +26,7 @@ class ApiAsteroides:
         params = {
             "start_date": data_busca,
             "end_date": data_busca,
-            "api_key": self.api_key
+            "api_key": self.api_key,
         }
         try:
             response = requests.get(url, params=params)

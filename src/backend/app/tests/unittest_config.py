@@ -1,5 +1,5 @@
 class UnitTestConfig:
-    
+
     def __init__(self) -> None:
         self.unit_test = False
 
@@ -8,5 +8,6 @@ class UnitTestConfig:
 
     def get_unit_test(self):
         return self.unit_test
+
 
 unittest_config = UnitTestConfig()
