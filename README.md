@@ -104,12 +104,3 @@ Para executar os testes unitários do backend, navegue até a pasta `src/backend
 cd src/backend
 pytest
 ```
-
-## 👥 Contribuidores
-
-*   **Guilherme Fogolin** - [GitHub](https://github.com/GuilhermeFogolin)
-*   **Pedro Lemos** - [GitHub](https://github.com/pedrolemos4)
-
----
-Feito com ❤️ para o projeto de Engenharia de Software.
-..
