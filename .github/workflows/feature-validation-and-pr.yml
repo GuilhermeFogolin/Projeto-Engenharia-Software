@@ -1,0 +1,95 @@
+name: Feature Branch CI and PR
+
+on:
+  # Aciona o workflow em pushes para branches com o prefixo "feature/"
+  push:
+    branches:
+      - 'feature/**'
+
+jobs:
+  # JOB 1: Validar o código do Frontend
+  frontend-ci:
+    name: Frontend CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          # Ajuste o caminho se o seu package-lock.json estiver em outro lugar
+          cache-dependency-path: 'package-lock.json'
+
+      - name: 3. Instalar dependências e rodar Linter
+        # Ajuste o caminho para a pasta do seu frontend se for diferente
+        working-directory: ./
+        run: |
+          npm install
+          npm run lint # Garanta que o script "lint" exista no seu package.json
+
+  # JOB 2: Validar o código do Backend
+  backend-ci:
+    name: Backend CI
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 2. Configurar Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.9'
+
+      - name: 3. Instalar dependências
+        # Ajuste o caminho para a pasta do seu backend se for diferente
+        run: |
+          python -m pip install --upgrade pip
+          pip install flake8 pytest
+          if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; fi
+
+      - name: 4. Rodar Linter (flake8) e Testes (pytest)
+        # Ajuste os caminhos se necessário
+        run: |
+          echo "Rodando Linter..."
+          flake8 backend/ --count --show-source --statistics
+          echo "Rodando Testes..."
+          pytest backend/app/tests/
+
+  # JOB 3: Criar o Pull Request (se os jobs anteriores passarem)
+  create-pull-request:
+    name: Create Pull Request
+    # Depende do sucesso dos jobs de frontend e backend
+    needs: [frontend-ci, backend-ci]
+    runs-on: ubuntu-latest
+    steps:
+      - name: 1. Checkout do código
+        uses: actions/checkout@v4
+
+      - name: 2. Criar Pull Request da feature para a main
+        uses: peter-evans/create-pull-request@v6
+        with:
+          # O token é necessário para que a action possa criar um PR em seu nome
+          token: ${{ secrets.GITHUB_TOKEN }}
+          # A branch principal do seu repositório
+          base: main
+          # Título do Pull Request - usa a última mensagem de commit
+          title: 'Feature: ${{ github.event.head_commit.message }}'
+          # Corpo do Pull Request
+          body: |
+            Pull Request automático da branch `${{ github.ref_name }}`.
+            
+            **Alterações propostas:**
+            - ${{ github.event.head_commit.message }}
+            
+            Este PR foi gerado após a passagem dos testes de CI/CD.
+            
+            @github-copilot favor revisar.
+          # Nome do autor do commit que acionou o workflow
+          committer: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+          # Atribui o PR ao autor do commit
+          assignees: ${{ github.actor }}
+          # Adiciona uma label ao PR
+          labels: 'automated-pr, needs-review'
