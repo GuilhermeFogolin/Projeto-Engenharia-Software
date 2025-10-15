@@ -48,15 +48,15 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install flake8 pytest
-          if [ -f backend/requirements.txt ]; then pip install -r backend/requirements.txt; fi
+          if [ -f src/backend/requirements.txt ]; then pip install -r src/backend/requirements.txt; fi
 
       - name: 4. Rodar Linter (flake8) e Testes (pytest)
         # Ajuste os caminhos se necessário
         run: |
           echo "Rodando Linter..."
-          flake8 backend/ --count --show-source --statistics
+          flake8 src/backend/ --count --show-source --statistics
           echo "Rodando Testes..."
-          pytest backend/app/tests/
+          pytest src/backend/app/tests/
 
   # JOB 3: Criar o Pull Request (se os jobs anteriores passarem)
   create-pull-request:
