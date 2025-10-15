@@ -1,5 +1,5 @@
 import unittest
-from unittest.mock import patch, Mock, MagicMock
+from unittest.mock import patch, Mock
 import requests
 
 from src.adapters.external.nasa.asteroides.api_asteroides import ApiAsteroides

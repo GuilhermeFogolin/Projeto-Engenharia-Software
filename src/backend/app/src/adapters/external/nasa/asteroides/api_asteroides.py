@@ -1,5 +1,4 @@
 import requests
-from datetime import date
 import os
 from dotenv import load_dotenv
 

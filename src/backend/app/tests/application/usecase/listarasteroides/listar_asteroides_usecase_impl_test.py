@@ -1,4 +1,3 @@
-import unittest
 from unittest.mock import Mock, patch
 
 from src.application.usecase.listarasteroides.listar_asteroides_usecase_impl import (

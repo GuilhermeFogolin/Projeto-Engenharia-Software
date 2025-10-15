@@ -1,5 +1,4 @@
 import unittest
-from unittest.mock import Mock
 
 from src.domain.entities.asteroide import Asteroide
 

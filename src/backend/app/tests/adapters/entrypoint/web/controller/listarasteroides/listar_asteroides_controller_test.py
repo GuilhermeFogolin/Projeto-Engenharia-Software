@@ -1,4 +1,3 @@
-import unittest
 from unittest.mock import patch, Mock
 
 from src.app import app

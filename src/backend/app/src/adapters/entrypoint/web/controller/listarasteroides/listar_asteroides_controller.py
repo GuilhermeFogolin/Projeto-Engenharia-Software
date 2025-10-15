@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, Response
+from flask import Blueprint, Response
 import json
 from application.usecase.listarasteroides.listar_asteroides_usecase_impl import (
     ListarAsteroidesUseCaseImpl,
