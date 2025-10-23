@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from domain.entities.resposta_asteroides import RespostaAsteroides
+from src.domain.entities.resposta_asteroides import RespostaAsteroides
 
 
 class ListarAsteroidesUseCase(ABC):

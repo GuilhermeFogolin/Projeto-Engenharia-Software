@@ -1,9 +1,9 @@
-from application.usecase.listarasteroides.listar_asteroides_usecase import (
+from src.application.usecase.listarasteroides.listar_asteroides_usecase import (
     ListarAsteroidesUseCase,
 )
-from domain.entities.asteroide import Asteroide
-from domain.entities.resposta_asteroides import RespostaAsteroides
-from adapters.external.nasa.asteroides.api_asteroides import ApiAsteroides
+from src.domain.entities.asteroide import Asteroide
+from src.domain.entities.resposta_asteroides import RespostaAsteroides
+from src.adapters.external.nasa.asteroides.api_asteroides import ApiAsteroides
 
 
 class ListarAsteroidesUseCaseImpl(ListarAsteroidesUseCase):

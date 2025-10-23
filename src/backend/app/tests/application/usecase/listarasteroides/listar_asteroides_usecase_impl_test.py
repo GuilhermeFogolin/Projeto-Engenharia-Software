@@ -46,10 +46,10 @@ class TestListarAsteroidesUseCaseImpl:
         resultado = self.use_case.execute("2024-01-01")
 
         # Assert
-        assert len(resultado) == 1
-        assert isinstance(resultado[0], Asteroide)
-        assert resultado[0].id == "123456"
-        assert resultado[0].nome == "Asteroide Teste"
+        assert len(resultado.asteroides) == 1
+        assert isinstance(resultado.asteroides[0], Asteroide)
+        assert resultado.asteroides[0].id == "123456"
+        assert resultado.asteroides[0].nome == "Asteroide Teste"
         mock_api_instance.buscar_por_data.assert_called_once_with(
             data_busca="2024-01-01"
         )
@@ -67,7 +67,7 @@ class TestListarAsteroidesUseCaseImpl:
         resultado = self.use_case.execute("2024-01-01")
 
         # Assert
-        assert resultado == []
+        assert resultado.asteroides == []
 
     @patch(
         "src.application.usecase.listarasteroides.listar_asteroides_usecase_impl.ApiAsteroides"
@@ -83,5 +83,4 @@ class TestListarAsteroidesUseCaseImpl:
         # Act
         resultado = self.use_case.execute("2024-01-01")
 
-        # Assert
-        assert resultado == []
+        assert resultado.asteroides == []

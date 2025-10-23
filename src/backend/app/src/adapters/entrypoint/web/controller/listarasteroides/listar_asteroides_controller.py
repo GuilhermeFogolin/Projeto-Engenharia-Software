@@ -1,6 +1,6 @@
 from flask import Blueprint, Response
 import json
-from application.usecase.listarasteroides.listar_asteroides_usecase_impl import (
+from src.application.usecase.listarasteroides.listar_asteroides_usecase_impl import (
     ListarAsteroidesUseCaseImpl,
 )
 
