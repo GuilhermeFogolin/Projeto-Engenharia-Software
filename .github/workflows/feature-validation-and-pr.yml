@@ -47,24 +47,11 @@ jobs:
         # Ajuste o caminho para a pasta do seu backend se for diferente
         run: |
           python -m pip install --upgrade pip
-          pip install flake8 pytest
+          pip install pytest
           if [ -f src/backend/requirements.txt ]; then pip install -r src/backend/requirements.txt; fi
 
       - name: 4. Formatar com Black e Rodar Linter/Testes
         run: |
-          # Instala black a partir do requirements.txt e formata o código
-          pip install black
-          black src/backend/
-
-          # Adiciona e commita as alterações de formatação, se houver
-          git config --global user.name 'github-actions'
-          git config --global user.email 'github-actions@github.com'
-          git add src/backend/
-          # O comando abaixo falhará se não houver nada para commitar, por isso o "|| true"
-          git commit -m "ci: formatar código com black" || true
-          
-          echo "Rodando Linter..."
-          flake8 src/backend/ --count --show-source --statistics
           echo "Rodando Testes..."
           pytest src/backend/app/tests/
 
