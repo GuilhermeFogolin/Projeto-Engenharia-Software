@@ -3,6 +3,8 @@ import ChicxulubSection from './components/ChicxulubSection';
 import ApodSearchSection from './components/ApodSearchSection';
 import NasaImageGallery from './components/NasaImageGallery';
 import './App.css';
+import teamPhoto from './assets/team-photo.jpeg';
+import logoGif from './assets/COSMIC.gif';
 import {
   BarChart,
   Bar,
@@ -438,6 +440,7 @@ function App() {
 
   const formattedDateLabel = formatDateToLabel(selectedDate);
   const maxSelectableDate = new Date().toISOString().split('T')[0];
+  const currentYear = new Date().getFullYear();
 
   useEffect(() => {
     if (!selectedDate) {
@@ -502,6 +505,13 @@ function App() {
     setShowLunarInfo((prev) => !prev);
   };
 
+  const handleCtaClick = () => {
+    const analysisSection = document.getElementById('analise-asteroides');
+    if (analysisSection) {
+      analysisSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
   return (
     <div className="app-container">
       <div className="content">
@@ -510,16 +520,20 @@ function App() {
             <video className="bg-video" src={bgVideo} autoPlay loop muted playsInline />
           </div>
         <header className="header">
-          <div className="logo">Logo</div>
+          <div className="logo">
+            <img src={logoGif} alt="Logotipo animado Cosmic" />
+          </div>
           <nav className="nav">
-            <a href="#curiosidades">Curiosidades</a>
-            <a href="#asteroides">Asteroides</a>
+            <a href="#asteroides">Curiosidades</a>
+            <a href="#chicxulub">Asteroides</a>
             <a href="#sobre-nos">Sobre nós</a>
           </nav>
         </header>
         <main className="main-content">
           <h1>Acenda sua curiosidade, <br /> Amplie seu universo!</h1>
-          <button className="cta-button">Conheça mais</button>
+          <button type="button" className="cta-button" onClick={handleCtaClick}>
+            Conheça mais
+          </button>
         </main>
         </div>
 
@@ -595,8 +609,8 @@ function App() {
         </div>
 
 
-        {/* Terceira seção - análise de dados */}
-        <section id="asteroides" className="analysis-section">
+  {/* Terceira seção - análise de dados */}
+  <section id="analise-asteroides" className="analysis-section">
           <div className="analysis-text">
             <h2>Desde o tamanho, <br/> até risco de <span className="about-title-accent">colisão.</span></h2>
             <p>Analisamos como esses corpos celestes se comportam e quais merecem mais atenção.</p>
@@ -704,7 +718,7 @@ function App() {
 
         <NasaImageGallery />
 
-        {/* Terceira seção: Sobre nós */}
+        {/* Ultima seção: Sobre nós */}
         <section id="sobre-nos" className="section-about">
           <div className="about-inner">
             <div className="about-text">
@@ -713,20 +727,38 @@ function App() {
                 <span className="about-title-accent">nós</span>
               </h2>
               <p className="about-desc">
-                Descrição sobre nós: Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text.
+                Descrição sobre nós: Feito pelo Pedro, o André, o Yan e o Guilherme! Estamos aqui para levar você em uma jornada fascinante pelo cosmos.
               </p>
               <p className="about-desc">
-                Este espaço pode receber informações adicionais sobre a equipe, missão e objetivos do projeto.
+                Somos uma equipe apaixonada por astronomia e tecnologia, dedicada a explorar os mistérios do universo e compartilhar conhecimento com o mundo.
               </p>
             </div>
             <div className="about-media">
               <div className="about-placeholder">
-                <div className="about-placeholder-gradient" />
-                <span className="about-placeholder-label">Imagem futura</span>
+                <img
+                  src={teamPhoto}
+                  alt="Equipe Cosmic"
+                  className="about-image"
+                  loading="lazy"
+                />
+                <div className="about-placeholder-gradient" aria-hidden="true" />
+                <span className="about-placeholder-label">Equipe Cosmic</span>
               </div>
             </div>
           </div>
         </section>
+
+        <footer className="page-footer">
+          <div className="footer-content">
+            <img
+              src={logoGif}
+              alt="Logotipo animado Cosmic"
+              className="footer-logo"
+              loading="lazy"
+            />
+            <p>© {currentYear} Projeto Lucy. Todos os direitos reservados.</p>
+          </div>
+        </footer>
       </div>
     </div>
   );
