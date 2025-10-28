@@ -13,7 +13,6 @@ const ChicxulubSection = () => {
         const section = imageRef.current.closest('.chicxulub-section');
         if (!section) return;
 
-        const sectionRect = section.getBoundingClientRect();
         const windowHeight = window.innerHeight;
 
         // Calculate progress as the image container enters the viewport from bottom
