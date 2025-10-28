@@ -1,0 +1,1 @@
+"""Legacy close-approaches use case tests intentionally removed."""
